@@ -1,10 +1,22 @@
 import path from 'path';
+import webpack from 'webpack';
 
 export default {
-  entry: path.join(__dirname, '/client/index.js'),
+  devtools: 'eval-source-map',
+  entry: [
+    'webpack-hot-middleware/client',
+    'react-hot-loader/patch',
+    path.join(__dirname, '/client/index.js')
+  ],
   output: {
-    path: '/'
+    path: '/',
+    publicPath: '/'
   },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [{
       test: /\.js$/,
