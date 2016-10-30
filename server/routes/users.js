@@ -6,7 +6,9 @@ const router = express.Router();
 router.post('/', (req, res) => {
   const { errors, isValid } = validateInput(req.body);
 
-  if(!isValid) {
+  if(isValid) {
+    res.send({ success: true});
+  } else {
     res.status(400).send(errors);
   }
 });
